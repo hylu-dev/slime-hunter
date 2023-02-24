@@ -219,7 +219,6 @@ color_ramp = SubResource( 15 )
 [node name="SlimeGreen" type="KinematicBody2D"]
 material = SubResource( 16 )
 script = ExtResource( 3 )
-health = 2
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 18 )

@@ -30,12 +30,12 @@ func take_damage(damage: int) -> void:
 		Global.score += 1
 		queue_free()
 		
-	yield( get_node("AnimationPlayer"), "animation_finished" )
+	yield(get_node("AnimationPlayer"), "animation_finished" )
 	$AnimationPlayer.play("Move")
 		
 func knockback(source_position: Vector2) -> void:
-	hit_particles.rotation = abs(get_angle_to(source_position)) + PI
-	print(get_angle_to(source_position))
+	hit_particles.rotation = get_angle_to(source_position) + PI
+	print(hit_particles.rotation)
 	hit_particles.restart()
 	knockback_vector = -position.direction_to(source_position)*knockback
 	move_and_slide(source_position)

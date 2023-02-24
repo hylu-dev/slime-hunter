@@ -206,6 +206,7 @@ gradient = SubResource( 14 )
 
 [sub_resource type="ParticlesMaterial" id=13]
 flag_disable_z = true
+spread = 60.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 100.0
 initial_velocity_random = 0.5
@@ -213,7 +214,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 3.0
 scale_random = 0.7
-color = Color( 0.235294, 0.909804, 0.439216, 1 )
+color = Color( 0.709804, 1, 0.764706, 1 )
 color_ramp = SubResource( 15 )
 
 [node name="SlimeGreen" type="KinematicBody2D"]
@@ -251,9 +252,8 @@ anims/RESET = SubResource( 11 )
 [node name="HitParticles" type="Particles2D" parent="."]
 scale = Vector2( 2, 2 )
 emitting = false
-amount = 15
+amount = 20
 lifetime = 0.5
-one_shot = true
 explosiveness = 1.0
 randomness = 0.5
 process_material = SubResource( 13 )

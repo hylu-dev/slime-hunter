@@ -15,3 +15,7 @@ func _on_area_entered(hitbox: AllyHitbox) -> void:
 	if owner.has_method("take_damage"):
 		print(owner, " took ", hitbox.damage, " damage")
 		owner.take_damage(hitbox.damage)
+		
+	if owner.has_method("knockback"):
+		owner.knockback(hitbox.get_parent().global_position)
+		

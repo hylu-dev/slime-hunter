@@ -4,8 +4,8 @@
 [ext_resource path="res://Combat/Weapons/Sword/sword.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 20.0
-height = 40.0
+radius = 30.0
+height = 50.0
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
@@ -115,13 +115,13 @@ rotation = 1.5708
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AllyHitbox"]
-position = Vector2( 5, -1.80999e-05 )
+position = Vector2( 15, -5.43594e-05 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( -2, 26 )
-scale = Vector2( 0.640625, 0.609375 )
+position = Vector2( -2, 36 )
+scale = Vector2( 0.977364, 0.929687 )
 frames = SubResource( 5 )
 animation = "attack"
 

@@ -1,8 +1,6 @@
 extends Enemy
 
 func _ready() -> void:
-	health = 1
-	speed = 25
 	$AnimationPlayer.play("Move")
 
 func _enter_tree() -> void:

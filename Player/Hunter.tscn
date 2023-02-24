@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://Player/Hunter.gd" type="Script" id=1]
 [ext_resource path="res://Player/Sprites/hunter.png" type="Texture" id=2]
@@ -183,15 +183,22 @@ animations = [ {
 
 [sub_resource type="Animation" id=65]
 resource_name = "AttackDown"
+length = 0.4
 
 [sub_resource type="Animation" id=66]
 resource_name = "AttackLeft"
+length = 0.4
+
+[sub_resource type="Animation" id=102]
+resource_name = "AttackReady"
 
 [sub_resource type="Animation" id=67]
 resource_name = "AttackRight"
+length = 0.4
 
 [sub_resource type="Animation" id=68]
 resource_name = "AttackUp"
+length = 0.4
 
 [sub_resource type="Animation" id=6]
 resource_name = "IdleDown"
@@ -381,7 +388,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -1, 1 ) ]
+"values": [ Vector2( 1, 1 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Weapon:z_index")
@@ -393,7 +400,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ -1 ]
+"values": [ 1 ]
 }
 tracks/7/type = "value"
 tracks/7/path = NodePath("Weapon:rotation_degrees")
@@ -405,7 +412,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 90.0 ]
+"values": [ 0.0 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -911,6 +918,7 @@ animation = "idle_down"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/AttackDown = SubResource( 65 )
 anims/AttackLeft = SubResource( 66 )
+anims/AttackReady = SubResource( 102 )
 anims/AttackRight = SubResource( 67 )
 anims/AttackUp = SubResource( 68 )
 anims/IdleDown = SubResource( 6 )
@@ -946,11 +954,10 @@ position = Vector2( 0, 5 )
 
 [node name="Weapon" parent="." instance=ExtResource( 5 )]
 position = Vector2( -14, 10 )
-rotation = 1.5708
-scale = Vector2( -1, 1 )
-z_index = -1
+z_index = 1
 
 [node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1, 10 )

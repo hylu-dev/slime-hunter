@@ -1,13 +1,13 @@
 extends Control
 
 var rng = RandomNumberGenerator.new()
-onready var screen_size = get_viewport_rect().size
-onready var spawn_timer = $SpawnTimer
+onready var screen_size := get_viewport_rect().size
+onready var spawn_timer:Timer = $SpawnTimer
 var enemies := [
 	preload("res://Enemies/SlimeGreen.tscn")
 ]
 
-export var spawn_interval = 3
+export var spawn_interval:float = 3
 
 func _ready() -> void:
 	rng.randomize()
@@ -34,8 +34,7 @@ func _on_timeout():
 	enemy.init(spawn_position)
 	get_tree().current_scene.add_child(enemy)
 	
-	spawn_timer.start(spawn_interval)
-	
+	spawn_timer.start(rng.randf_range(0, spawn_interval))
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:

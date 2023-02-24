@@ -28,7 +28,6 @@ var state = WALK
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
-	connect('attacked', $Weapon, '_on_attack_trigger')
 	connect('attacked', $HitboxPivot/WeaponHitbox, '_on_attack_trigger')
 	attack_timer.connect('timeout', self, '_attack_ready')
 	animation_state = animation_tree.get("parameters/playback")
@@ -52,10 +51,10 @@ func walk_state(delta: float):
 		direction.y = 1
 	direction = direction.normalized()
 	
-#	if Input.is_action_pressed("run"):
-#		speed = 200
-#	else:
-#		speed = 100
+	if Input.is_action_pressed("run"):
+		speed = 200
+	else:
+		speed = 100
 		
 	if direction != Vector2.ZERO and movement_enabled:
 		animation_state.travel("Walk")
@@ -68,6 +67,11 @@ func walk_state(delta: float):
 		animation_state.travel("Idle")
 
 	move_and_collide(velocity)
+	_enforce_bounds()
+
+func _enforce_bounds() -> void: 
+	position.x = clamp(position.x, 0, screen_size.x)
+	position.y = clamp(position.y, 0, screen_size.y)
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack") and attack_timer.is_stopped():

@@ -223,10 +223,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "idle_down", "idle_down" ]
+"values": [ "idle_down" ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -379,7 +379,7 @@ tracks/4/keys = {
 "values": [ Vector2( -14, 10 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Weapon:scale")
+tracks/5/path = NodePath("Weapon:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -388,10 +388,10 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ) ]
+"values": [ 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Weapon:z_index")
+tracks/6/path = NodePath("Weapon:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -400,10 +400,10 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 1 ]
+"values": [ Vector2( 1, 1 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Weapon:rotation_degrees")
+tracks/7/path = NodePath("Weapon:z_index")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -411,8 +411,8 @@ tracks/7/enabled = true
 tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -954,7 +954,6 @@ position = Vector2( 0, 5 )
 
 [node name="Weapon" parent="." instance=ExtResource( 5 )]
 position = Vector2( -14, 10 )
-z_index = 1
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true

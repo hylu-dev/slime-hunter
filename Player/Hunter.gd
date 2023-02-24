@@ -72,13 +72,13 @@ func walk_state(delta: float):
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack") and attack_timer.is_stopped():
 		emit_signal("attacked")
+		attack_timer.start(attack_cooldown)
 		$HitboxPivot/WeaponHitbox.enable_hitbox()
 		animation_player.play("AttackDown")
 		movement_enabled = false;
 		yield(animation_player, "animation_finished")
 		movement_enabled = true;
 		$HitboxPivot/WeaponHitbox.disable_hitbox()
-		attack_timer.start(attack_cooldown)
 		
 func _attack_ready() -> void:
 	print("attack ready")

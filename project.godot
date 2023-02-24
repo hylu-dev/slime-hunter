@@ -9,25 +9,63 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "",
+"base": "Area2D",
+"class": "AllyHitbox",
+"language": "GDScript",
+"path": "res://Combat/AllyHitbox.gd"
+}, {
+"base": "Area2D",
+"class": "AllyHurtbox",
+"language": "GDScript",
+"path": "res://Combat/AllyHurtbox.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Enemies/Enemy.gd"
+}, {
+"base": "Area2D",
+"class": "EnemyHitbox",
+"language": "GDScript",
+"path": "res://Combat/EnemyHitbox.gd"
+}, {
+"base": "Area2D",
+"class": "EnemyHurtbox",
+"language": "GDScript",
+"path": "res://Combat/EnemyHurtbox.gd"
+}, {
+"base": "EditorVCSInterface",
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://addons/godot-git-plugin/git_api.gdns"
 } ]
 _global_script_class_icons={
+"AllyHitbox": "",
+"AllyHurtbox": "",
+"Enemy": "",
+"EnemyHitbox": "",
+"EnemyHurtbox": "",
 "GitAPI": ""
 }
 
 [application]
 
 config/name="Slime Hunter"
+run/main_scene="res://Scenes/Game.tscn"
 boot_splash/show_image=false
-config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://Global.gd"
+
+[debug]
+
+shapes/collision/shape_color=Color( 1, 1, 1, 0.27451 )
 
 [display]
 
 window/size/width=640
-window/size/height=480
+window/size/height=360
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
@@ -36,9 +74,37 @@ window/stretch/aspect="keep"
 version_control_autoload_on_startup=true
 version_control_plugin_name="GitAPI"
 
+[global]
+
+layer=false
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
 
 [input]
 
@@ -71,6 +137,17 @@ run={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+attack={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_render/layer_1="game_world"
+2d_render/layer_2="enemy_hitboxes"
+2d_render/layer_3="ally_hitboxes"
 
 [physics]
 
@@ -78,4 +155,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"

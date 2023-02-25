@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Combat/EnemyHitbox.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/Sprites/green_slime.png" type="Texture" id=2]
-[ext_resource path="res://Enemies/Slime.gd" type="Script" id=3]
+[ext_resource path="res://Enemies/SlimeRed.gd" type="Script" id=3]
 [ext_resource path="res://Combat/EnemyHurtbox.gd" type="Script" id=4]
 
 [sub_resource type="ShaderMaterial" id=16]
@@ -208,12 +208,10 @@ color_ramp = SubResource( 15 )
 
 [node name="SlimeRed" type="KinematicBody2D"]
 material = SubResource( 16 )
-scale = Vector2( 1.5, 1.5 )
+scale = Vector2( 2, 2 )
 script = ExtResource( 3 )
 health = 5
 speed = 25
-knockback = 200
-score_value = 10
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 18 )

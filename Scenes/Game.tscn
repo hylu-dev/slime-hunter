@@ -32,12 +32,29 @@ position = Vector2( 284, 220 )
 [node name="EnemySpawner" parent="." instance=ExtResource( 4 )]
 spawn_interval = 2.0
 
-[node name="Score" type="Label" parent="."]
+[node name="GameTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+
+[node name="Score" type="Label" parent="Canvas"]
 anchor_right = 1.0
 margin_top = 34.0
 margin_bottom = 66.0
 theme = SubResource( 2 )
 text = "0"
 align = 1
+uppercase = true
+script = ExtResource( 2 )
+
+[node name="GameTime" type="Label" parent="Canvas"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 28.0
+margin_bottom = 42.0
+theme = SubResource( 2 )
+text = "0"
+align = 1
+valign = 1
 uppercase = true
 script = ExtResource( 2 )

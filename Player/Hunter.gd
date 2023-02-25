@@ -17,6 +17,7 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var animation_tree: AnimationTree = $AnimationTree
 onready var animation_state
 onready var attack_timer: Timer = $AttackTimer
+onready var grass_particles: Particles2D = $Weapon/GrassParticles
 
 var movement_enabled: bool = true
 
@@ -68,6 +69,13 @@ func walk_state(delta: float):
 
 	move_and_collide(velocity)
 	_enforce_bounds()
+	_emit_grass_particles()
+	
+func _emit_grass_particles() -> void:
+	if animation_state.get_current_node() == "Walk":
+		grass_particles.set_emitting(true)
+	else:
+		grass_particles.set_emitting(false)
 
 func _enforce_bounds() -> void: 
 	position.x = clamp(position.x, 0, screen_size.x)

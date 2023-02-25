@@ -1,10 +1,11 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://Player/Hunter.gd" type="Script" id=1]
 [ext_resource path="res://Player/Sprites/hunter.png" type="Texture" id=2]
 [ext_resource path="res://Combat/Weapons/WeaponHitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Combat/AllyHurtbox.gd" type="Script" id=4]
 [ext_resource path="res://Combat/Weapons/Weapon.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Particles/grass.png" type="Texture" id=6]
 
 [sub_resource type="AtlasTexture" id=69]
 atlas = ExtResource( 2 )
@@ -340,7 +341,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ "idle" ]
+"values": [ "idle_down" ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("HitboxPivot/WeaponHitbox:position")
@@ -903,6 +904,43 @@ graph_offset = Vector2( 113.647, 0 )
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 14.0
 
+[sub_resource type="Gradient" id=103]
+offsets = PoolRealArray( 0, 0.955307 )
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=104]
+gradient = SubResource( 103 )
+
+[sub_resource type="Curve" id=105]
+min_value = -1.0
+_data = [ Vector2( 0, -0.637406 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.489867 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=106]
+curve = SubResource( 105 )
+
+[sub_resource type="ParticlesMaterial" id=107]
+lifetime_randomness = 0.5
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+gravity = Vector3( 0, 80, 0 )
+initial_velocity = 50.0
+initial_velocity_random = 0.5
+angular_velocity = 90.0
+angular_velocity_random = 0.6
+orbit_velocity = 0.0
+orbit_velocity_random = 1.0
+orbit_velocity_curve = SubResource( 106 )
+linear_accel = 12.39
+linear_accel_random = 1.0
+angle = 720.0
+angle_random = 1.0
+scale = 2.0
+scale_random = 1.0
+color = Color( 0.368627, 1, 0.239216, 1 )
+color_ramp = SubResource( 104 )
+hue_variation = 1.0
+hue_variation_random = 1.0
+
 [sub_resource type="CircleShape2D" id=101]
 radius = 14.0357
 
@@ -954,6 +992,13 @@ position = Vector2( 0, 5 )
 
 [node name="Weapon" parent="." instance=ExtResource( 5 )]
 position = Vector2( -14, 10 )
+
+[node name="GrassParticles" type="Particles2D" parent="Weapon"]
+position = Vector2( -48, 14 )
+emitting = false
+amount = 15
+process_material = SubResource( 107 )
+texture = ExtResource( 6 )
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true

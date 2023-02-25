@@ -4,7 +4,10 @@ var rng = RandomNumberGenerator.new()
 onready var screen_size := get_viewport_rect().size
 onready var spawn_timer:Timer = $SpawnTimer
 var enemies := [
-	preload("res://Enemies/SlimeGreen.tscn")
+	preload("res://Enemies/SlimeGreen.tscn"),
+	preload("res://Enemies/SlimeRed.tscn"),
+	preload("res://Enemies/SlimePurple.tscn"),
+	preload("res://Enemies/SlimeCyan.tscn")
 ]
 
 export var spawn_interval:float = 3

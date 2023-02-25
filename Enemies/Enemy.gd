@@ -7,6 +7,7 @@ export var speed := 50
 export var acceleration := 2
 export var friction := .5
 export var knockback := 300
+export var score_value := 1
 
 var velocity := Vector2.ZERO
 var knockback_vector = Vector2.ZERO
@@ -27,7 +28,7 @@ func take_damage(damage: int) -> void:
 		Engine.time_scale = 0.6
 		yield( get_node("AnimationPlayer"), "animation_finished" )
 		Engine.time_scale = 1
-		Global.score += 1
+		Global.score += score_value
 		queue_free()
 		
 	yield(get_node("AnimationPlayer"), "animation_finished" )
@@ -35,7 +36,6 @@ func take_damage(damage: int) -> void:
 		
 func knockback(source_position: Vector2) -> void:
 	hit_particles.rotation = get_angle_to(source_position) + PI
-	print(hit_particles.rotation)
 	hit_particles.restart()
 	knockback_vector = -position.direction_to(source_position)*knockback
 	move_and_slide(source_position)

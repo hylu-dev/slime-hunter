@@ -8,6 +8,7 @@ export var acceleration := 2
 export var friction := .5
 export var knockback := 300
 export var score_value := 1
+export var spawn_chance := 1.0
 
 var velocity := Vector2.ZERO
 var knockback_vector = Vector2.ZERO
@@ -20,6 +21,9 @@ signal enemy_death
 func init(spawn_position: Vector2) -> void:
 	rng.randomize()
 	position = spawn_position
+	
+func get_spawn_chance() -> float:
+	return spawn_chance
 	
 func take_damage(damage: int) -> void:
 	health -= damage

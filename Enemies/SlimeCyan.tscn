@@ -22,7 +22,7 @@ void fragment(){
 }
 
 void vertex() {
-  VERTEX += vec2(cos(TIME*4.0)*mod(TIME, 10.0), sin(TIME*4.0)*mod(TIME*3.0, 10.0));
+  VERTEX += vec2(cos(TIME*4.0)*mod(TIME, 50.0), sin(TIME*4.0)*mod(TIME*3.0, 50.0));
 }"
 
 [sub_resource type="ShaderMaterial" id=18]
@@ -213,6 +213,9 @@ scale = Vector2( 0.7, 0.7 )
 script = ExtResource( 3 )
 health = 2
 speed = 100
+knockback = 600
+score_value = 3
+spawn_chance = 0.5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 18 )

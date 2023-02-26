@@ -4,4 +4,4 @@ func take_damage(damage: int) -> void:
 	.take_damage(damage)
 	scale.x += rng.randf_range(0, .5)
 	scale.y += rng.randf_range(0, .5)
-	speed += rng.randf_range(0, 25)
+	speed += rng.randf_range(-25, 25)

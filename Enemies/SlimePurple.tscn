@@ -210,6 +210,9 @@ color_ramp = SubResource( 15 )
 material = SubResource( 16 )
 script = ExtResource( 3 )
 health = 3
+knockback = 250
+score_value = 5
+spawn_chance = 0.2
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 18 )

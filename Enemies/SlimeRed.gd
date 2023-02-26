@@ -4,4 +4,5 @@ func take_damage(damage: int) -> void:
 	.take_damage(damage)
 	scale.x *= .8
 	scale.y *= .8
-	speed *= 1.1
+	speed += 10
+	knockback += 50

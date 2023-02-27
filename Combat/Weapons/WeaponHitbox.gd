@@ -9,7 +9,6 @@ func _ready():
 func _on_attack_trigger() -> void:
 	animation_player.play("Attack")
 	
-	
 func enable_hitbox() -> void:
 	hitbox.set_disabled(false)
 	

@@ -212,7 +212,7 @@ scale = Vector2( 2, 2 )
 script = ExtResource( 3 )
 health = 5
 speed = 25
-knockback = 100
+knockback = 50
 score_value = 10
 spawn_chance = 0.1
 

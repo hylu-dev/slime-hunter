@@ -1,16 +1,47 @@
 extends Node
 
-var elapsed_time = 0
 onready var game_timer:Timer = $GameTimer
-onready var game_time:Label = $Canvas/GameTime
-onready var score:Label = $Canvas/Score
+onready var game_time:Label = $HUD/GameTime
+onready var score:Label = $HUD/Score
+onready var hunter:KinematicBody2D = $Hunter
+onready var camera:Camera2D = $Camera2D
+onready var background:TextureRect = $Background
+onready var HUD:CanvasLayer = $HUD
+onready var game_over_canvas:CanvasLayer = $GameOverCanvas
+onready var animation_player:AnimationPlayer = $AnimationPlayer
+
+var game_over:bool = false
+
 
 func _ready() -> void:
 	game_timer.connect("timeout", self, "_update_time")
+	hunter.connect('death', self, '_on_death')
+	game_over_canvas.get_node("RestartButton").connect("button_up", self, 'reload_game')
 
 func _process(delta: float) -> void:
-	score.set_text(String(Global.score))
+	if game_over:
+		_game_over()
+		
+func reload_game() -> void:
+	Engine.time_scale = 1
+	get_tree().reload_current_scene()
 
 func _update_time() -> void:
-	elapsed_time += 1
-	game_time.set_text(String(elapsed_time))
+	Global.game_time += 1
+	game_time.set_text(String(Global.game_time))
+
+func _on_death() -> void:
+	Engine.time_scale = .3
+	animation_player.play("GameOver")
+	game_over = true
+	HUD.visible = false
+	game_over_canvas.visible = true
+	hunter.set_physics_process(false)
+	hunter.attack_enabled = false
+
+func _game_over() -> void:
+	camera.position = camera.position.linear_interpolate(hunter.position, .1)
+	camera.zoom = camera.zoom.linear_interpolate(Vector2(.5, .5), .05)
+	
+	
+	

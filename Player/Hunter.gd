@@ -7,6 +7,7 @@ export var friction := 20
 export var attack_cooldown := 1
 
 signal attacked
+signal death
 
 var velocity := Vector2.ZERO
 var direction := Vector2.ZERO
@@ -20,6 +21,7 @@ onready var attack_timer: Timer = $AttackTimer
 onready var grass_particles: Particles2D = $Weapon/GrassParticles
 
 var movement_enabled: bool = true
+var attack_enabled: bool = true
 
 enum {
 	WALK,
@@ -41,7 +43,7 @@ func _physics_process(delta: float) -> void:
 			pass
 	
 func walk_state(delta: float):
-	var direction := Vector2.ZERO
+	direction = Vector2.ZERO
 	if Input.is_action_pressed("move_left"):
 		direction.x = -1
 	elif Input.is_action_pressed("move_right"):
@@ -82,13 +84,12 @@ func _enforce_bounds() -> void:
 	position.y = clamp(position.y, 0, screen_size.y)
 	
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("attack") and attack_timer.is_stopped():
+	if event.is_action_pressed("attack") and attack_timer.is_stopped() and attack_enabled:
 		emit_signal("attacked")
 		attack_timer.start(attack_cooldown)
 		$HitboxPivot/WeaponHitbox.enable_hitbox()
-		animation_player.play("AttackDown")
 		movement_enabled = false;
-		yield(animation_player, "animation_finished")
+		yield(get_tree().create_timer(.4), "timeout")
 		movement_enabled = true;
 		$HitboxPivot/WeaponHitbox.disable_hitbox()
 		
@@ -98,7 +99,7 @@ func _attack_ready() -> void:
 func take_damage(damage: int) -> void:
 	health -= damage
 	if health < 1:
-		print("Death")
+		emit_signal("death")
 	
 	
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player/Hunter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Score.gd" type="Script" id=2]
@@ -6,55 +6,151 @@
 [ext_resource path="res://Enemies/EnemySpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Backgrounds/hill_bg.png" type="Texture" id=5]
 [ext_resource path="res://Fonts/Minecraft.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Theme/Theme.tres" type="Theme" id=7]
 
-[sub_resource type="DynamicFont" id=1]
-size = 32
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
+[sub_resource type="Curve" id=3]
+min_value = 1.0
+max_value = 8.0
+_data = [ Vector2( 0, 8 ), 0.0, -6.01186, 0, 0, Vector2( 0.25641, 4.94546 ), -1.11682, -1.11682, 0, 0, Vector2( 0.666667, 2.27273 ), 4.96364, 4.96364, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 6 )
 
-[sub_resource type="Theme" id=2]
-default_font = SubResource( 1 )
+[sub_resource type="Animation" id=4]
+resource_name = "GameOver"
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameOverCanvas/Black:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameOverCanvas/Black:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [node name="Game" type="Node"]
 script = ExtResource( 3 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 320, 180 )
+current = true
+
+[node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 640.0
-margin_bottom = 360.0
 texture = ExtResource( 5 )
+expand = true
 
 [node name="Hunter" parent="." instance=ExtResource( 1 )]
-position = Vector2( 284, 220 )
+position = Vector2( 320, 180 )
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 4 )]
-spawn_interval = 2.0
+difficulty_curve = SubResource( 3 )
 
 [node name="GameTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="Canvas" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Score" type="Label" parent="Canvas"]
+[node name="Score" type="Label" parent="HUD"]
 anchor_right = 1.0
 margin_top = 34.0
 margin_bottom = 66.0
-theme = SubResource( 2 )
+theme = ExtResource( 7 )
 text = "0"
 align = 1
 uppercase = true
 script = ExtResource( 2 )
 
-[node name="GameTime" type="Label" parent="Canvas"]
+[node name="GameTime" type="Label" parent="HUD"]
+visible = false
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 28.0
 margin_bottom = 42.0
-theme = SubResource( 2 )
+theme = ExtResource( 7 )
 text = "0"
 align = 1
 valign = 1
 uppercase = true
 script = ExtResource( 2 )
+
+[node name="GameOverCanvas" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Black" type="ColorRect" parent="GameOverCanvas"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Control" type="Control" parent="GameOverCanvas"]
+anchor_right = 1.0
+margin_top = 50.0
+margin_bottom = 200.0
+theme = ExtResource( 7 )
+
+[node name="GameOver" type="Label" parent="GameOverCanvas/Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -320.0
+margin_right = 320.0
+margin_bottom = 32.0
+theme = ExtResource( 7 )
+text = "Game Over"
+align = 1
+uppercase = true
+
+[node name="ScoreMessage" type="Label" parent="GameOverCanvas/Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -320.0
+margin_top = 70.0
+margin_right = 320.0
+margin_bottom = 102.0
+text = "Final Score: "
+align = 1
+valign = 1
+
+[node name="FinalScore" type="Label" parent="GameOverCanvas/Control/ScoreMessage"]
+margin_left = 421.0
+margin_right = 439.0
+margin_bottom = 32.0
+text = "0"
+align = 1
+uppercase = true
+script = ExtResource( 2 )
+
+[node name="RestartButton" type="Button" parent="GameOverCanvas"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -74.0
+margin_top = -131.0
+margin_right = 75.0
+margin_bottom = -103.0
+custom_fonts/font = SubResource( 6 )
+text = "Play Again?"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/GameOver = SubResource( 4 )
+anims/RESET = SubResource( 5 )

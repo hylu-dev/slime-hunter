@@ -19,11 +19,7 @@ func _ready() -> void:
 	hunter.connect('death', self, '_on_death')
 	game_over_canvas.get_node("RestartButton").connect("button_up", self, 'reload_game')
 
-func _process(delta: float) -> void:
-	
-	camera.position = camera.position.linear_interpolate(hunter.position, .1)
-	camera.zoom = camera.zoom.linear_interpolate(Vector2(.7, .7), .05)
-	
+func _process(delta: float) -> void:	
 	if game_over:
 		_game_over()
 		

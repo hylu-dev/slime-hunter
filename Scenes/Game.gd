@@ -3,7 +3,7 @@ extends Node
 onready var game_timer:Timer = $GameTimer
 onready var game_time:Label = $HUD/GameTime
 onready var score:Label = $HUD/Score
-onready var hunter:KinematicBody2D = $Hunter
+onready var hunter:KinematicBody2D = $YSort/Hunter
 onready var camera:Camera2D = $Camera2D
 onready var background:TextureRect = $Background
 onready var HUD:CanvasLayer = $HUD

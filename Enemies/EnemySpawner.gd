@@ -54,7 +54,7 @@ func _on_timeout():
 		3:
 			spawn_position = Vector2(screen_size.x+50, rand_pos.y)
 	enemy.init(spawn_position)
-	get_tree().current_scene.add_child(enemy)
+	get_tree().current_scene.get_node("YSort").add_child(enemy)
 	
 	spawn_timer.start(rng.randf_range(
 		difficulty_curve.interpolate(Global.game_time/spawn_growth),

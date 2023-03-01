@@ -1015,7 +1015,6 @@ radius = 14.0357
 
 [node name="Hunter" type="KinematicBody2D"]
 position = Vector2( 323, 229 )
-z_index = 1
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

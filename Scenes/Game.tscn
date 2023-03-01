@@ -59,10 +59,14 @@ anchor_bottom = 1.0
 texture = ExtResource( 5 )
 expand = true
 
-[node name="Hunter" parent="." instance=ExtResource( 1 )]
-position = Vector2( 320, 180 )
+[node name="YSort" type="YSort" parent="."]
 
-[node name="EnemySpawner" parent="." instance=ExtResource( 4 )]
+[node name="Hunter" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 320, 180 )
+z_index = 0
+health = 100
+
+[node name="EnemySpawner" parent="YSort" instance=ExtResource( 4 )]
 difficulty_curve = SubResource( 3 )
 spawn_growth = 10.0
 
